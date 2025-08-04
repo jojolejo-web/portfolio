@@ -4,8 +4,14 @@ const resend = new Resend(process.env.Resend_api_key);
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    const { nom, email, text } = req.body;
-    console.log("Clé Resend:", process.env.RESEND_API_KEY);
+    let body;
+    try {
+      body = await new Response(req.body).json();
+    } catch {
+      return res.status(400).json({ error: "Invalid JSON" });
+    }
+
+    const { nom, email, text } = body;
 
     try {
       await resend.emails.send({
@@ -20,6 +26,6 @@ export default async function handler(req, res) {
       res.status(500).json({ error: error.message });
     }
   } else {
-    res.status(405).end(); 
+    res.status(405).end();
   }
 }
