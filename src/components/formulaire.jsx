@@ -36,7 +36,7 @@ const [loading, setLoading] = useState(false);
             alert("Message envoyé avec succès !");
         }catch (error) {
             console.log(error);
-            alert("une erreur est survenue");
+            alert(error.message);
         }finally{
             setLoading(false);
         };
