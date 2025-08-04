@@ -25,7 +25,7 @@ const [loading, setLoading] = useState(false);
         setLoading(true);
 
         try{
-            const response = await fetch("/api/sendEmail", {
+            const response = await fetch("https://formspree.io/f/xzzvalnv", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({nom, email, text}),
