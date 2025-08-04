@@ -1,0 +1,24 @@
+import { Resend } from "resend";
+
+const resend = new Resend("re_UvmDXJ3E_7uWCX62fpCKt6tpWizS65uHe");
+
+export default async function handler(req, res) {
+  if (req.method === "POST") {
+    const { nom, email, text } = req.body;
+
+    try {
+      await resend.emails.send({
+        from: "onboarding@resend.dev",
+        to: "philppe65800@gmail.com",
+        subject: `Nouveau message de ${nom}`,
+        html: `Email : ${email}\nMessage : ${text}`,
+      });
+
+      res.status(200).json({ success: true });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  } else {
+    res.status(405).end(); 
+  }
+}
