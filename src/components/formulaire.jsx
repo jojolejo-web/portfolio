@@ -27,7 +27,7 @@ const [loading, setLoading] = useState(false);
         try{
             const response = await fetch("/api/sendEmail", {
                 method: "POST",
-                headers: {"Content-Type": "application.json"},
+                headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({nom, email, text}),
 
             });
