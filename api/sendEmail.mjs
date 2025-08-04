@@ -5,6 +5,7 @@ const resend = new Resend(process.env.Resend_api_key);
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const { nom, email, text } = req.body;
+    console.log("Clé Resend:", process.env.RESEND_API_KEY);
 
     try {
       await resend.emails.send({
